@@ -15,7 +15,7 @@ import com.pkmn.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     var typeNamesArray =
-        arrayOf("Bug", "Dark", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost",
+        arrayOf("", "Bug", "Dark", "Dragon", "Electric", "Fairy", "Fighting", "Fire", "Flying", "Ghost",
                  "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water")
 
     private lateinit var binding: ActivityMainBinding
@@ -49,39 +49,54 @@ class MainActivity : AppCompatActivity() {
         
         var firstTypeOk = false
         var secondTypeOk = false
+        var allOK = false
 
-        if (binding.FirstTypeText.text.toString().equals(binding.SecondTypeText.text.toString()))
-            errorDialogSameType()
-
-        if (binding.FirstTypeText.text.toString().equals("")) firstType = noType
-        if (binding.FirstTypeText.text.toString().equals("")) secondType = noType
+        if (binding.FirstTypeText.text.toString().equals("")) {
+            firstType = noType
+            firstTypeOk = true
+        }
+        if (binding.SecondTypeText.text.toString().equals("")) {
+            secondType = noType
+            secondTypeOk = true
+        }
 
         for (i in 0..17) {
+            if (binding.FirstTypeText.text.toString().equals
+               (binding.SecondTypeText.text.toString())) {
+                errorDialogSameType()
+                break
+            }
+
             if (firstType == noType && secondType == noType) {
                 errorDialogNoType()
                 break
             }
             
-            if (firstTypeOk && secondTypeOk) break
+            if (firstTypeOk && secondTypeOk) {
+                allOK = true
+                break
+            }
             
-            if (binding.FirstTypeText.text.toString().equals(typeArray[i].name)) {
+            if (!firstTypeOk && binding.FirstTypeText.text.toString().equals(typeArray[i].name)) {
                 firstType = typeArray[i]
                 firstTypeOk = true
             }
-            if (binding.SecondTypeText.text.toString().equals(typeArray[i].name)){
+            if (!secondTypeOk && binding.SecondTypeText.text.toString().equals(typeArray[i].name) ) {
                 secondType = typeArray[i]
                 secondTypeOk = true
             }
         }
-        
-        binding.ResultText.setText(calculateDamageTaken(firstType, secondType))
+
+        if (allOK) {
+            binding.ResultText.setText(calculateDamageTaken(firstType, secondType))
+        }
     }
 
     private fun errorDialogNoType() {
         AlertDialog.Builder(this)
             .setTitle("Check failed")
             .setMessage("Must select at least a type")
-            .setPositiveButton("OK") { dialog, which -> dialog.dismiss() }
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
     }
 
@@ -89,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("Check failed")
             .setMessage("Select two different Types or just one Type")
-            .setPositiveButton("OK") { dialog, which -> dialog.dismiss() }
+            .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
     }
 }

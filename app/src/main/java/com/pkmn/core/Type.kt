@@ -3,7 +3,7 @@ package com.pkmn.core
 class Type(var name: String, var damageTaken: Array<DamageTaken>)
 
 
-val noType = Type("/", noTypeTakes)
+val noType = Type("", noTypeTakes)
 
 val Bug = Type("Bug", BugTakes)
 
