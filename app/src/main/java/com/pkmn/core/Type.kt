@@ -55,7 +55,8 @@ fun calculateDamageTaken(type1: Type, type2: Type): String {
 
         currentDamageTaken.type = type1.damageTaken[i].type
         currentDamageTaken.multiplier = type1.damageTaken[i].multiplier * type2.damageTaken[i].multiplier
-        combination.damageTaken[i] = currentDamageTaken
+        combination.damageTaken[i].type = currentDamageTaken.type
+        combination.damageTaken[i].multiplier = currentDamageTaken.multiplier
     }
 
     val x4 = arrayListOf<String>()

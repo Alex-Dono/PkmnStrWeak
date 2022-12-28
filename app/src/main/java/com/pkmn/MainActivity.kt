@@ -2,8 +2,6 @@ package com.pkmn
 
 import android.R
 import android.os.Bundle
-import android.view.Window
-import android.view.WindowManager
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -48,6 +46,9 @@ class MainActivity : AppCompatActivity() {
     private fun onCheckClicked() {
         var firstType = Type("", arrayOf())
         var secondType = Type("", arrayOf())
+        
+        var firstTypeOk = false
+        var secondTypeOk = false
 
         if (binding.FirstTypeText.text.toString().equals(binding.SecondTypeText.text.toString()))
             errorDialogSameType()
@@ -57,19 +58,26 @@ class MainActivity : AppCompatActivity() {
 
         for (i in 0..17) {
             if (firstType == noType && secondType == noType) {
-                errorDialog()
+                errorDialogNoType()
                 break
             }
-            if (binding.FirstTypeText.text.toString().equals(typeArray[i].name))
+            
+            if (firstTypeOk && secondTypeOk) break
+            
+            if (binding.FirstTypeText.text.toString().equals(typeArray[i].name)) {
                 firstType = typeArray[i]
-
-            if (binding.SecondTypeText.text.toString().equals(typeArray[i].name))
+                firstTypeOk = true
+            }
+            if (binding.SecondTypeText.text.toString().equals(typeArray[i].name)){
                 secondType = typeArray[i]
+                secondTypeOk = true
+            }
         }
+        
         binding.ResultText.setText(calculateDamageTaken(firstType, secondType))
     }
 
-    private fun errorDialog() {
+    private fun errorDialogNoType() {
         AlertDialog.Builder(this)
             .setTitle("Check failed")
             .setMessage("Must select at least a type")
