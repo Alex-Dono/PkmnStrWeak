@@ -2,7 +2,7 @@ package com.pkmn.core
 
 class DamageTaken (var type: String, var multiplier: Float)
 
-
+///////// CREATION OF DAMAGE TAKEN ARRAYS ////////
 val noTypeTakes = arrayOf(
     DamageTaken("Bug", 1F), DamageTaken("Dark", 1F), DamageTaken("Dragon", 1F),
 
@@ -268,3 +268,4 @@ val WaterTakes = arrayOf(
 
     DamageTaken("Rock", 1F), DamageTaken("Steel", 0.5F), DamageTaken("Water", 0.5F),
 )
+//////////////

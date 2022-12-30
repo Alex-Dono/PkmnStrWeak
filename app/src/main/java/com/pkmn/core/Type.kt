@@ -2,7 +2,7 @@ package com.pkmn.core
 
 class Type(var name: String, var damageTaken: Array<DamageTaken>)
 
-
+/////// TYPES ////////
 val noType = Type("", noTypeTakes)
 
 val Bug = Type("Bug", BugTakes)
@@ -40,12 +40,12 @@ val Rock = Type("Rock", RockTakes)
 val Steel = Type("Steel", SteelTakes)
 
 val Water = Type("Water", WaterTakes)
-
+///////////////
 
 val typeArray = arrayOf (Bug, Dark, Dragon, Electric, Fairy, Fighting, Fire, Flying,
                          Ghost, Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Steel, Water)
 
-
+/////// DAMAGE CALCULATION /////////
 fun calculateDamageTaken(type1: Type, type2: Type): String {
     var combination = Type("Combination", Array(18) { DamageTaken("", 1F) })
     val currentDamageTaken = DamageTaken("", 1F)
@@ -69,10 +69,26 @@ fun calculateDamageTaken(type1: Type, type2: Type): String {
         if (combination.damageTaken[i].multiplier == 0F) x0.add(combination.damageTaken[i].type)
     }
 
-    val x4Damage = "This Pokèmon takes x4 damage by $x4"
-    val x2Damage = "This Pokèmon takes x2 damage by $x2"
-    val x0Damage = "This Pokèmon takes 0 damage by $x0"
-    val x1Damage = "This Pokèmon takes normal damage by everything else"
+    val x4Damage = "This Pokémon takes x4 damage by:\n$x4"
+    val x2Damage = "This Pokémon takes x2 damage by:\n$x2"
+    val x0Damage = "This Pokémon takes 0 damage by:\n$x0"
+    val x1Damage = "This Pokémon takes normal damage by everything else"
 
-    return "$x4Damage\n$x2Damage\n$x0Damage\n$x1Damage\n"
+////// RETURN CONDITIONS ////////
+    if (x4.isNotEmpty() && x2.isNotEmpty() && x0.isNotEmpty()) return "$x4Damage\n$x2Damage\n$x0Damage\n$x1Damage"
+
+    if (x2.isNotEmpty() && x0.isNotEmpty()) return "$x2Damage\n$x0Damage\n$x1Damage"
+
+    if (x4.isNotEmpty() && x2.isNotEmpty()) return "$x4Damage\n$x2Damage\n$x1Damage"
+
+    if (x4.isNotEmpty() && x0.isNotEmpty()) return "$x4Damage\n$x0Damage\n$x1Damage"
+
+    if (x0.isNotEmpty()) return "$x0Damage\n$x1Damage"
+
+    if (x2.isNotEmpty()) return "$x2Damage\n$x1Damage"
+
+    //else
+    return "$x4Damage\n$x1Damage"
+///////////
 }
+////////////
