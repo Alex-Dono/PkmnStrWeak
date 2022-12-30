@@ -19,13 +19,13 @@ val Fighting = Type("Fighting", FightingTakes)
 
 val Fire = Type("Fire", FireTakes)
 
-val Flying = Type("Fairy", FlyingTakes)
+val Flying = Type("Flying", FlyingTakes)
 
 val Ghost = Type("Ghost", GhostTakes)
 
 val Grass = Type("Grass", GrassTakes)
 
-val Ground = Type("Fairy", GroundTakes)
+val Ground = Type("Ground", GroundTakes)
 
 val Ice = Type("Ice", IceTakes)
 

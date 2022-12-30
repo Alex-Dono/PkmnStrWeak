@@ -43,8 +43,7 @@ class MainActivity : AppCompatActivity() {
 /////////////////////////
 
         binding.CheckButton.setOnClickListener { onCheckClicked() }
-        binding.FirstType.setOnClickListener { onFirstTypeClicked() }
-        binding.SecondType.setOnClickListener { onSecondTypeClicked() }
+
     }
 
 ///////////////// FUNCTION FOR WHEN CHECK BUTTON IS CLICKED ////////////////////////////////////
@@ -93,21 +92,21 @@ class MainActivity : AppCompatActivity() {
     }
 ////////////////
 
-    private fun onFirstTypeClicked(){  /// SET RESULT BACK TO INVISIBLE ON CLICK ///
+    /*private fun onFirstTypeClicked(){  /// SET RESULT BACK TO INVISIBLE ON CLICK ///
         binding.Result.visibility = View.INVISIBLE
         binding.ResultText.setText("")
-    }
+    }*/
 
-    private fun onSecondTypeClicked(){  /// SET RESULT BACK TO INVISIBLE ON CLICK ///
+    /*private fun onSecondTypeClicked(){  /// SET RESULT BACK TO INVISIBLE ON CLICK ///
         binding.Result.visibility = View.INVISIBLE
         binding.ResultText.setText("")
-    }
+    }*/
 
 //////// ERRORS //////////
     private fun errorDialogNoType() {
         AlertDialog.Builder(this)
             .setTitle("Check failed")
-            .setMessage("Must select at least a type")
+            .setMessage("Must select at least a Type")
             .setPositiveButton("OK") { dialog, _ -> dialog.dismiss() }
             .show()
     }
