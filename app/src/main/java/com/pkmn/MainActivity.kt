@@ -4,6 +4,7 @@ import android.R
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.pkmn.core.Type
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-/////////////////////// CREATION OF NAMES ARRAY ADAPTER FOR TYPE SELECTION //////////////////////
+
         //Create Array Adapter
         val adapter: ArrayAdapter<String> =
             ArrayAdapter<String>(this, R.layout.select_dialog_singlechoice, typeNamesArray)
@@ -40,18 +41,28 @@ class MainActivity : AppCompatActivity() {
         //Set the adapter
         acTextView1.setAdapter(adapter)
         acTextView2.setAdapter(adapter)
-/////////////////////////
+
 
         binding.CheckButton.setOnClickListener { onCheckClicked() }
 
+        binding.FirstTypeText.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) onTypeClicked() }
+        binding.SecondTypeText.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) onTypeClicked() }
+
+        var resultViewBase = TextView(this)
+        resultViewBase.setText("")
+
+        binding.BarLayout2.addView(resultViewBase)
+
     }
 
-///////////////// FUNCTION FOR WHEN CHECK BUTTON IS CLICKED ////////////////////////////////////
+
     private fun onCheckClicked() {
         var firstType = Type("", arrayOf());  var secondType = Type("", arrayOf())
         
         var firstTypeOk = false;  var secondTypeOk = false;  var allOK = false
-//// CONDITIONS //////
+
         if (binding.FirstTypeText.text.toString().equals("")) {
             firstType = noType
             firstTypeOk = true }
@@ -68,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                 (binding.SecondTypeText.text.toString())) {
             errorDialogSameType()
             return }
-//////////////
+
         for (i in 0..17) {
             if (!firstTypeOk && binding.FirstTypeText.text.toString().
                 equals(typeArray[i].name)) {
@@ -79,28 +90,43 @@ class MainActivity : AppCompatActivity() {
                 equals(typeArray[i].name) ) {
                 secondType = typeArray[i]
                 secondTypeOk = true }
-//// CONDITION FOR BREAKING LOOP ////
+
             if (firstTypeOk && secondTypeOk) {
                 allOK = true
                 break }
-///////////////
+
         }
 
-        if (allOK) {  ////// CALL FUNCTION TO CALCULATE DAMAGE TAKEN ////////
-            binding.Result.visibility = View.VISIBLE
-            binding.ResultText.setText(calculateDamageTaken(firstType, secondType)) }
+        if (allOK) {
+
+            val theArrays = calculateDamageTaken(firstType, secondType)
+
+            val x4 = theArrays[0]; val x2 = theArrays[1]; val x0 = theArrays[2]
+
+            binding.BarLayout2.visibility = View.VISIBLE
+
+            if (x4.isNotEmpty() && x2.isNotEmpty() && x0.isNotEmpty()){
+
+
+            }
+
+        }
     }
-////////////////
 
-    /*private fun onFirstTypeClicked(){  /// SET RESULT BACK TO INVISIBLE ON CLICK ///
-        binding.Result.visibility = View.INVISIBLE
-        binding.ResultText.setText("")
-    }*/
 
-    /*private fun onSecondTypeClicked(){  /// SET RESULT BACK TO INVISIBLE ON CLICK ///
-        binding.Result.visibility = View.INVISIBLE
-        binding.ResultText.setText("")
-    }*/
+    private fun onTypeClicked(){
+        binding.BarLayout2.visibility = View.INVISIBLE
+    }
+
+    fun Type4xViewManagement(array:ArrayList<String>){
+        for (i in 0 until array.size){
+            if (i == 0){
+                binding.Type4xLabel1.text = array[0]
+            }
+
+        }
+
+    }
 
 //////// ERRORS //////////
     private fun errorDialogNoType() {
