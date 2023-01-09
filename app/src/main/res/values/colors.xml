@@ -8,8 +8,28 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="green">#4CAF50</color>
     <color name="green_scyther">#8BC34A</color>
     <color name="ocean">#009688</color>
     <color name="red">#BF0D0D</color>
+
+    <!-- Type colors -->
+
+    <color name="bug">#90EC50</color>
+    <color name="dark">#121111</color>
+    <color name="dragon">#4112AF</color>
+    <color name="electric">#DDA738</color>
+    <color name="fairy">#C077D1</color>
+    <color name="fighting">#C1D56410</color>
+    <color name="fire">#DC3A08</color>
+    <color name="flying">#3F489F</color>
+    <color name="ghost">#1C053C</color>
+    <color name="grass">#074309</color>
+    <color name="ground">#F32E1A09</color>
+    <color name="ice">#269CA8</color>
+    <color name="normal">#939191</color>
+    <color name="poison">#781FF6</color>
+    <color name="psychic">#B62493</color>
+    <color name="rock">#403A39</color>
+    <color name="steel">#454D4E</color>
+    <color name="water">#0385CC</color>
 </resources>

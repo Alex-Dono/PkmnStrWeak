@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="standard">32dp</dimen>
+    <dimen name="first">135dp</dimen>
+    <dimen name="second">4dp</dimen>
+    <dimen name="zero">0dp</dimen>
+</resources>
