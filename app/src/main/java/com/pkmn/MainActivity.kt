@@ -1,26 +1,21 @@
 package com.pkmn
 
 import android.R
-import android.app.ActionBar
-import android.graphics.Color
-import android.graphics.Typeface
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.view.ViewGroup.LayoutParams
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.setMargins
-import androidx.core.view.setPadding
-import com.google.android.material.appbar.AppBarLayout
+import androidx.appcompat.app.AppCompatDelegate
 import com.pkmn.core.Type
 import com.pkmn.core.calculateDamageTaken
 import com.pkmn.core.noType
 import com.pkmn.core.typeArray
 import com.pkmn.databinding.ActivityMainBinding
+import com.pkmn.databinding.ForTheLabelsBinding
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +28,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -110,6 +107,23 @@ class MainActivity : AppCompatActivity() {
             val x4 = theArrays[0]; val x2 = theArrays[1];
             val x05 = theArrays[2]; val x0 = theArrays[3]
 
+            binding.Types4x.removeAllViews()
+            binding.Types2x.removeAllViews()
+            binding.Types05x.removeAllViews()
+            binding.Types0x.removeAllViews()
+
+            binding.Result4x.visibility = View.VISIBLE
+            binding.Types4x.visibility = View.VISIBLE
+
+            binding.Result2x.visibility = View.VISIBLE
+            binding.Types2x.visibility = View.VISIBLE
+
+            binding.Result05x.visibility = View.VISIBLE
+            binding.Types05x.visibility = View.VISIBLE
+
+            binding.Result0x.visibility = View.VISIBLE
+            binding.Types0x.visibility = View.VISIBLE
+
             type4xViewManagement(x4)
             type2xViewManagement(x2)
             type05xViewManagement(x05)
@@ -122,154 +136,124 @@ class MainActivity : AppCompatActivity() {
 
     private fun onTypeClicked(){
         binding.BarLayout2.visibility = View.INVISIBLE
+
+        binding.Result4x.visibility = View.VISIBLE
+        binding.Types4x.visibility = View.VISIBLE
+
+        binding.Result2x.visibility = View.VISIBLE
+        binding.Types2x.visibility = View.VISIBLE
+
+        binding.Result05x.visibility = View.VISIBLE
+        binding.Types05x.visibility = View.VISIBLE
+
+        binding.Result0x.visibility = View.VISIBLE
+        binding.Types0x.visibility = View.VISIBLE
     }
 
 /////////// PRINTING RESULT /////////////
     private fun type4xViewManagement(array:ArrayList<String>){
-
         if (array.size == 0){
             binding.Result4x.visibility = View.INVISIBLE
             binding.Types4x.visibility = View.INVISIBLE
             return
         }
 
-        val remainingTypes = Array(array.size-2) { TextView(this) }
+        val typeViews = Array(array.size) { TextView(this) }
+        val theParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
         for (i in 0 until array.size){
-            if (i == 0){
-                binding.Type4xLabel1.text = array[0]
-                binding.Type4xLabel2.visibility = View.INVISIBLE
-                continue
-            }
-            if (i == 1){
-                binding.Type4xLabel1.text = array[1]
-                binding.Type4xLabel2.visibility = View.VISIBLE
-                continue
-            }
+            typeViews[i] = binding.LabelBase
+            typeViews[i].setBackgroundResource(setTypeBackground(array[i]))
+            typeViews[i].text = array[i]
+            typeViews[i].visibility = View.VISIBLE
 
-            remainingTypes[i - 2].layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-            remainingTypes[i - 2].layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            remainingTypes[i - 2].layout(10, 5, 5, 0)
-            remainingTypes[i - 2].setPadding(5)
-            remainingTypes[i - 2].text = array[i]
-            remainingTypes[i - 2].setTextColor(Color.BLACK)
-            remainingTypes[i - 2].textSize = 15F
-            remainingTypes[i - 2].setTypeface(null, Typeface.BOLD)
-            remainingTypes[i - 2].setBackgroundResource(com.pkmn.R.drawable.rounded_corner_view)
-
-            binding.Types4x.addView(remainingTypes[i - 2])
+            runOnUiThread { binding.Types4x.addView(typeViews[i], -1, theParams) }
         }
     }
 
     private fun type2xViewManagement(array:ArrayList<String>){
-
         if (array.size == 0){
             binding.Result2x.visibility = View.INVISIBLE
             binding.Types2x.visibility = View.INVISIBLE
             return
         }
 
-        val remainingTypes = Array(array.size-2) { TextView(this) }
+        val typeViews = Array(array.size) { TextView(this) }
+        val theParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
         for (i in 0 until array.size){
-            if (i == 0){
-                binding.Type2xLabel1.text = array[0]
-                binding.Type4xLabel2.visibility = View.INVISIBLE
-                continue
-            }
-            if (i == 1){
-                binding.Type2xLabel1.text = array[1]
-                binding.Type2xLabel2.visibility = View.VISIBLE
-                continue
-            }
+            typeViews[i] = binding.LabelBase
+            typeViews[i].setBackgroundResource(setTypeBackground(array[i]))
+            typeViews[i].text = array[i]
+            typeViews[i].visibility = View.VISIBLE
 
-            remainingTypes[i - 2].layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-            remainingTypes[i - 2].layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            remainingTypes[i - 2].layout(10, 5, 5, 0)
-            remainingTypes[i - 2].setPadding(5)
-            remainingTypes[i - 2].text = array[i]
-            remainingTypes[i - 2].setTextColor(Color.BLACK)
-            remainingTypes[i - 2].textSize = 15F
-            remainingTypes[i - 2].setTypeface(null, Typeface.BOLD)
-            remainingTypes[i - 2].setBackgroundResource(com.pkmn.R.drawable.rounded_corner_view)
-
-            binding.Types2x.addView(remainingTypes[i - 2])
+            binding.Types2x.addView(typeViews[i], -1, theParams)
         }
     }
 
     private fun type05xViewManagement(array:ArrayList<String>){
-
         if (array.size == 0){
             binding.Result05x.visibility = View.INVISIBLE
             binding.Types05x.visibility = View.INVISIBLE
             return
         }
 
-        val remainingTypes = Array(array.size-2) { TextView(this) }
+        val typeViews = Array(array.size) { TextView(this) }
+        val theParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
         for (i in 0 until array.size){
-            if (i == 0){
-                binding.Type05xLabel1.text = array[0]
-                binding.Type05xLabel2.visibility = View.INVISIBLE
-                continue
-            }
-            if (i == 1){
-                binding.Type05xLabel1.text = array[1]
-                binding.Type05xLabel2.visibility = View.VISIBLE
-                continue
-            }
+            typeViews[i] = binding.LabelBase
+            typeViews[i].setBackgroundResource(setTypeBackground(array[i]))
+            typeViews[i].text = array[i]
+            typeViews[i].visibility = View.VISIBLE
 
-            remainingTypes[i - 2].layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-            remainingTypes[i - 2].layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            remainingTypes[i - 2].layout(10, 5, 5, 0)
-            remainingTypes[i - 2].setPadding(5)
-            remainingTypes[i - 2].text = array[i]
-            remainingTypes[i - 2].setTextColor(Color.BLACK)
-            remainingTypes[i - 2].textSize = 15F
-            remainingTypes[i - 2].setTypeface(null, Typeface.BOLD)
-            remainingTypes[i - 2].setBackgroundResource(com.pkmn.R.drawable.rounded_corner_view)
-
-            binding.Types05x.addView(remainingTypes[i - 2])
+            binding.Types05x.addView(typeViews[i], -1, theParams)
         }
     }
 
     private fun type0xViewManagement(array:ArrayList<String>){
-
         if (array.size == 0){
             binding.Result0x.visibility = View.INVISIBLE
             binding.Types0x.visibility = View.INVISIBLE
             return
         }
 
-        val remainingTypes = Array(array.size-2) { TextView(this) }
+        val typeViews = Array(array.size) { TextView(this) }
+        val theParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
         for (i in 0 until array.size){
-            if (i == 0){
-                binding.Type0xLabel1.text = array[0]
-                binding.Type0xLabel2.visibility = View.INVISIBLE
-                continue
-            }
-            if (i == 1){
-                binding.Type0xLabel1.text = array[1]
-                binding.Type0xLabel2.visibility = View.VISIBLE
-                continue
-            }
+            typeViews[i] = binding.LabelBase
+            typeViews[i].setBackgroundResource(setTypeBackground(array[i]))
+            typeViews[i].text = array[i]
+            typeViews[i].visibility = View.VISIBLE
 
-            remainingTypes[i - 2].layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT
-            remainingTypes[i - 2].layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT
-            remainingTypes[i - 2].layout(10, 5, 5, 0)
-            remainingTypes[i - 2].setPadding(5)
-            remainingTypes[i - 2].text = array[i]
-            remainingTypes[i - 2].setTextColor(Color.BLACK)
-            remainingTypes[i - 2].textSize = 15F
-            remainingTypes[i - 2].setTypeface(null, Typeface.BOLD)
-            remainingTypes[i - 2].setBackgroundResource(com.pkmn.R.drawable.rounded_corner_view)
-
-            binding.Types0x.addView(remainingTypes[i - 2])
+            binding.Types0x.addView(typeViews[i], -1, theParams)
         }
     }
 ///////////////////
 
+    private fun setTypeBackground(type:String) :Int {
+        if (type == "Bug") return com.pkmn.R.drawable.bug_background
+        if (type == "Dark") return com.pkmn.R.drawable.dark_background
+        if (type == "Dragon") return com.pkmn.R.drawable.dragon_background
+        if (type == "Electric") return com.pkmn.R.drawable.electric_background
+        if (type == "Fairy") return com.pkmn.R.drawable.fairy_background
+        if (type == "Fighting") return com.pkmn.R.drawable.fighting_background
+        if (type == "Fire") return com.pkmn.R.drawable.fire_background
+        if (type == "Flying") return com.pkmn.R.drawable.flying_background
+        if (type == "Ghost") return com.pkmn.R.drawable.ghost_background
+        if (type == "Grass") return com.pkmn.R.drawable.grass_background
+        if (type == "Ground") return com.pkmn.R.drawable.ground_background
+        if (type == "Ice") return com.pkmn.R.drawable.ice_background
+        if (type == "Normal") return com.pkmn.R.drawable.normal_background
+        if (type == "Poison") return com.pkmn.R.drawable.poison_background
+        if (type == "Psychic") return com.pkmn.R.drawable.psychic_background
+        if (type == "Rock") return com.pkmn.R.drawable.rock_background
+        if (type == "Steel") return com.pkmn.R.drawable.steel_background
+        if (type == "Water") return com.pkmn.R.drawable.water_background
+
+        return 0
+    }
 
 //////// ERRORS //////////
     private fun errorDialogNoType() {

@@ -103,7 +103,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/CheckButton"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginEnd="150dp"
@@ -111,15 +111,14 @@
         android:text="Check"
         android:textSize="17sp"
         app:strokeColor="@color/black"
-        app:strokeWidth="0.8dp"
+        app:strokeWidth="1dp"
         android:shadowColor="@color/black"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SecondType"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toBottomOf="@+id/SecondType" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/BarLayout2"
@@ -170,7 +169,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:background="@drawable/rounded_corner_view"
+                android:background="@drawable/bug_background"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -188,10 +187,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:background="@drawable/rounded_corner_view"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/Type4xLabel1" />
+                android:background="@drawable/bug_background" />
 
         </LinearLayout>
 
@@ -232,7 +228,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:background="@drawable/rounded_corner_view"
+                android:background="@drawable/bug_background"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -250,10 +246,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:background="@drawable/rounded_corner_view"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/Type2xLabel1" />
+                android:background="@drawable/bug_background" />
 
         </LinearLayout>
 
@@ -294,7 +287,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:background="@drawable/rounded_corner_view"
+                android:background="@drawable/bug_background"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -312,10 +305,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:background="@drawable/rounded_corner_view"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/Type0xLabel1" />
+                android:background="@drawable/bug_background" />
 
         </LinearLayout>
 
@@ -356,7 +346,7 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:background="@drawable/rounded_corner_view"
+                android:background="@drawable/bug_background"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -366,7 +356,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginEnd="32dp"
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
                 android:visibility="visible"
@@ -374,13 +363,29 @@
                 android:textColor="@color/black"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:background="@drawable/rounded_corner_view"
-
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/Type0xLabel1" />
+                android:background="@drawable/bug_background" />
 
         </LinearLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/LabelBase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:padding="5dp"
+        android:visibility="invisible"
+        android:text="GRASS"
+        android:textColor="@color/white"
+        android:shadowColor="@color/black"
+        android:shadowDx="4"
+        android:shadowDy="3"
+        android:shadowRadius="3"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        android:background="@drawable/bug_background"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

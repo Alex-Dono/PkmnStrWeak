@@ -8,13 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="green_scyther">#8BC34A</color>
     <color name="ocean">#009688</color>
     <color name="red">#BF0D0D</color>
 
     <!-- Type colors -->
 
-    <color name="bug">#90EC50</color>
+    <color name="bug">#8BC34A</color>
     <color name="dark">#121111</color>
     <color name="dragon">#4112AF</color>
     <color name="electric">#DDA738</color>
