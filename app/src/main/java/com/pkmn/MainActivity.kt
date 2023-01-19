@@ -2,9 +2,7 @@ package com.pkmn
 
 import android.R
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup.LayoutParams
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -15,8 +13,6 @@ import com.pkmn.core.calculateDamageTaken
 import com.pkmn.core.noType
 import com.pkmn.core.typeArray
 import com.pkmn.databinding.ActivityMainBinding
-import com.pkmn.databinding.ForTheLabelsBinding
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,6 +21,8 @@ class MainActivity : AppCompatActivity() {
                  "Grass", "Ground", "Ice", "Normal", "Poison", "Psychic", "Rock", "Steel", "Water")
 
     private lateinit var binding: ActivityMainBinding   ///// BINDING //////
+    private lateinit var multiBindingss: Array<ActivityMainBinding>
+    private var bindingCounter = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+        multiBindingss = Array(25) { ActivityMainBinding.inflate(layoutInflater) }
 
         binding.BarLayout2.visibility = View.INVISIBLE
 
@@ -107,22 +106,7 @@ class MainActivity : AppCompatActivity() {
             val x4 = theArrays[0]; val x2 = theArrays[1];
             val x05 = theArrays[2]; val x0 = theArrays[3]
 
-            binding.Types4x.removeAllViews()
-            binding.Types2x.removeAllViews()
-            binding.Types05x.removeAllViews()
-            binding.Types0x.removeAllViews()
-
-            binding.Result4x.visibility = View.VISIBLE
-            binding.Types4x.visibility = View.VISIBLE
-
-            binding.Result2x.visibility = View.VISIBLE
-            binding.Types2x.visibility = View.VISIBLE
-
-            binding.Result05x.visibility = View.VISIBLE
-            binding.Types05x.visibility = View.VISIBLE
-
-            binding.Result0x.visibility = View.VISIBLE
-            binding.Types0x.visibility = View.VISIBLE
+            removeAddAndMakeVisible()
 
             type4xViewManagement(x4)
             type2xViewManagement(x2)
@@ -130,6 +114,7 @@ class MainActivity : AppCompatActivity() {
             type0xViewManagement(x0)
 
             binding.BarLayout2.visibility = View.VISIBLE
+            bindingCounter = 0
         }
     }
 ///////////////
@@ -155,19 +140,22 @@ class MainActivity : AppCompatActivity() {
         if (array.size == 0){
             binding.Result4x.visibility = View.INVISIBLE
             binding.Types4x.visibility = View.INVISIBLE
+            binding.BarLayout2.removeView(binding.Result4x)
+            binding.BarLayout2.removeView(binding.Types4x)
             return
         }
 
         val typeViews = Array(array.size) { TextView(this) }
-        val theParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
         for (i in 0 until array.size){
-            typeViews[i] = binding.LabelBase
+            typeViews[i] = multiBindingss[bindingCounter].LabelBase
             typeViews[i].setBackgroundResource(setTypeBackground(array[i]))
             typeViews[i].text = array[i]
             typeViews[i].visibility = View.VISIBLE
 
-            runOnUiThread { binding.Types4x.addView(typeViews[i], -1, theParams) }
+            multiBindingss[bindingCounter].ConstraintLayout.removeView(multiBindingss[bindingCounter].LabelBase)
+            binding.Types4x.addView(typeViews[i], -1)
+            bindingCounter ++
         }
     }
 
@@ -175,19 +163,22 @@ class MainActivity : AppCompatActivity() {
         if (array.size == 0){
             binding.Result2x.visibility = View.INVISIBLE
             binding.Types2x.visibility = View.INVISIBLE
+            binding.BarLayout2.removeView(binding.Result2x)
+            binding.BarLayout2.removeView(binding.Types2x)
             return
         }
 
         val typeViews = Array(array.size) { TextView(this) }
-        val theParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
         for (i in 0 until array.size){
-            typeViews[i] = binding.LabelBase
+            typeViews[i] = multiBindingss[bindingCounter].LabelBase
             typeViews[i].setBackgroundResource(setTypeBackground(array[i]))
             typeViews[i].text = array[i]
             typeViews[i].visibility = View.VISIBLE
 
-            binding.Types2x.addView(typeViews[i], -1, theParams)
+            multiBindingss[bindingCounter].ConstraintLayout.removeView(multiBindingss[bindingCounter].LabelBase)
+            binding.Types2x.addView(typeViews[i], -1)
+            bindingCounter ++
         }
     }
 
@@ -195,19 +186,22 @@ class MainActivity : AppCompatActivity() {
         if (array.size == 0){
             binding.Result05x.visibility = View.INVISIBLE
             binding.Types05x.visibility = View.INVISIBLE
+            binding.BarLayout2.removeView(binding.Result05x)
+            binding.BarLayout2.removeView(binding.Types05x)
             return
         }
 
         val typeViews = Array(array.size) { TextView(this) }
-        val theParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
         for (i in 0 until array.size){
-            typeViews[i] = binding.LabelBase
+            typeViews[i] = multiBindingss[bindingCounter].LabelBase
             typeViews[i].setBackgroundResource(setTypeBackground(array[i]))
             typeViews[i].text = array[i]
             typeViews[i].visibility = View.VISIBLE
 
-            binding.Types05x.addView(typeViews[i], -1, theParams)
+            multiBindingss[bindingCounter].ConstraintLayout.removeView(multiBindingss[bindingCounter].LabelBase)
+            binding.Types05x.addView(typeViews[i], -1)
+            bindingCounter ++
         }
     }
 
@@ -215,19 +209,22 @@ class MainActivity : AppCompatActivity() {
         if (array.size == 0){
             binding.Result0x.visibility = View.INVISIBLE
             binding.Types0x.visibility = View.INVISIBLE
+            binding.BarLayout2.removeView(binding.Result0x)
+            binding.BarLayout2.removeView(binding.Types0x)
             return
         }
 
         val typeViews = Array(array.size) { TextView(this) }
-        val theParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
         for (i in 0 until array.size){
-            typeViews[i] = binding.LabelBase
+            typeViews[i] = multiBindingss[bindingCounter].LabelBase
             typeViews[i].setBackgroundResource(setTypeBackground(array[i]))
             typeViews[i].text = array[i]
             typeViews[i].visibility = View.VISIBLE
 
-            binding.Types0x.addView(typeViews[i], -1, theParams)
+            multiBindingss[bindingCounter].ConstraintLayout.removeView(multiBindingss[bindingCounter].LabelBase)
+            binding.Types0x.addView(typeViews[i], -1)
+            bindingCounter ++
         }
     }
 ///////////////////
@@ -253,6 +250,28 @@ class MainActivity : AppCompatActivity() {
         if (type == "Water") return com.pkmn.R.drawable.water_background
 
         return 0
+    }
+
+    private fun removeAddAndMakeVisible() {
+        binding.Types4x.removeAllViews()
+        binding.Types2x.removeAllViews()
+        binding.Types05x.removeAllViews()
+        binding.Types0x.removeAllViews()
+        binding.ConstraintLayout.removeView(binding.LabelBase)
+
+
+
+        binding.Result4x.visibility = View.VISIBLE
+        binding.Types4x.visibility = View.VISIBLE
+
+        binding.Result2x.visibility = View.VISIBLE
+        binding.Types2x.visibility = View.VISIBLE
+
+        binding.Result05x.visibility = View.VISIBLE
+        binding.Types05x.visibility = View.VISIBLE
+
+        binding.Result0x.visibility = View.VISIBLE
+        binding.Types0x.visibility = View.VISIBLE
     }
 
 //////// ERRORS //////////
