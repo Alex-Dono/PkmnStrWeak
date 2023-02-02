@@ -14,21 +14,21 @@
     <!-- Type colors -->
 
     <color name="bug">#8BC34A</color>
-    <color name="dark">#121111</color>
+    <color name="dark">#CD070707</color>
     <color name="dragon">#4112AF</color>
     <color name="electric">#DDA738</color>
     <color name="fairy">#C077D1</color>
     <color name="fighting">#C1D56410</color>
     <color name="fire">#DC3A08</color>
     <color name="flying">#3F489F</color>
-    <color name="ghost">#1C053C</color>
-    <color name="grass">#074309</color>
-    <color name="ground">#F32E1A09</color>
+    <color name="ghost">#A12A065C</color>
+    <color name="grass">#084C0A</color>
+    <color name="ground">#B04A2405</color>
     <color name="ice">#269CA8</color>
     <color name="normal">#939191</color>
     <color name="poison">#781FF6</color>
     <color name="psychic">#B62493</color>
-    <color name="rock">#403A39</color>
-    <color name="steel">#454D4E</color>
+    <color name="rock">#AB503F3A</color>
+    <color name="steel">#4F5759</color>
     <color name="water">#0385CC</color>
 </resources>

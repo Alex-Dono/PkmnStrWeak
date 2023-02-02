@@ -4,6 +4,7 @@ import android.R
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.GridLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +24,13 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding   ///// BINDING //////
     private lateinit var multiBindingss: Array<ActivityMainBinding>
     private var bindingCounter = 0
+
+//// BOOLS /////
+    var needToAdd4x = false
+    var needToAdd2x = false
+    var needToAdd05x = false
+    var needToAdd0x = false
+/////////
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,10 +116,7 @@ class MainActivity : AppCompatActivity() {
 
             removeAddAndMakeVisible()
 
-            type4xViewManagement(x4)
-            type2xViewManagement(x2)
-            type05xViewManagement(x05)
-            type0xViewManagement(x0)
+            typeManagement(x4, x2, x05, x0)
 
             binding.BarLayout2.visibility = View.VISIBLE
             bindingCounter = 0
@@ -142,6 +147,8 @@ class MainActivity : AppCompatActivity() {
             binding.Types4x.visibility = View.INVISIBLE
             binding.BarLayout2.removeView(binding.Result4x)
             binding.BarLayout2.removeView(binding.Types4x)
+
+            needToAdd4x = true
             return
         }
 
@@ -165,6 +172,8 @@ class MainActivity : AppCompatActivity() {
             binding.Types2x.visibility = View.INVISIBLE
             binding.BarLayout2.removeView(binding.Result2x)
             binding.BarLayout2.removeView(binding.Types2x)
+
+            needToAdd2x = true
             return
         }
 
@@ -188,6 +197,8 @@ class MainActivity : AppCompatActivity() {
             binding.Types05x.visibility = View.INVISIBLE
             binding.BarLayout2.removeView(binding.Result05x)
             binding.BarLayout2.removeView(binding.Types05x)
+
+            needToAdd05x = true
             return
         }
 
@@ -211,6 +222,8 @@ class MainActivity : AppCompatActivity() {
             binding.Types0x.visibility = View.INVISIBLE
             binding.BarLayout2.removeView(binding.Result0x)
             binding.BarLayout2.removeView(binding.Types0x)
+
+            needToAdd0x = true
             return
         }
 
@@ -260,6 +273,25 @@ class MainActivity : AppCompatActivity() {
         binding.ConstraintLayout.removeView(binding.LabelBase)
 
 
+        if (needToAdd4x) {
+            binding.BarLayout2.addView(binding.Result4x, 0)
+            binding.BarLayout2.addView(binding.Types4x, 1)
+        }
+
+        if (needToAdd2x) {
+            binding.BarLayout2.addView(binding.Result2x, 2)
+            binding.BarLayout2.addView(binding.Types2x, 3)
+        }
+
+        if (needToAdd05x) {
+            binding.BarLayout2.addView(binding.Result05x, 4)
+            binding.BarLayout2.addView(binding.Types05x, 5)
+        }
+
+        if (needToAdd0x) {
+            binding.BarLayout2.addView(binding.Result0x, 6)
+            binding.BarLayout2.addView(binding.Types0x, 7)
+        }
 
         binding.Result4x.visibility = View.VISIBLE
         binding.Types4x.visibility = View.VISIBLE
@@ -272,6 +304,20 @@ class MainActivity : AppCompatActivity() {
 
         binding.Result0x.visibility = View.VISIBLE
         binding.Types0x.visibility = View.VISIBLE
+
+        needToAdd4x = false
+        needToAdd2x = false
+        needToAdd05x = false
+        needToAdd0x = false
+    }
+
+    private fun typeManagement(x4: ArrayList<String>, x2: ArrayList<String>,
+                               x05: ArrayList<String>, x0: ArrayList<String>)
+    {
+        type4xViewManagement(x4)
+        type2xViewManagement(x2)
+        type05xViewManagement(x05)
+        type0xViewManagement(x0)
     }
 
 //////// ERRORS //////////
